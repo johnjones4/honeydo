@@ -1,0 +1,15 @@
+service: honeydo
+
+provider:
+  name: aws
+  runtime: go1.x
+
+functions:
+  handler:
+    handler: bin/handler
+    events:
+      - http:
+          path: /
+          method: post
+    environment:
+      ${file(./prod.yml)}
