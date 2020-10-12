@@ -1,5 +1,1 @@
-.serverless
-bin
-pkg
-prod.yml
-src
+.DS_Store

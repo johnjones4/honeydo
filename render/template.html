@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 2em;
+      line-height: 1em;
+    }
+
+    .todo {
+      padding: 1em;
+      background: #ccc;
+    }
+
+    .todo:nth-child(even) {
+      background: #aaa;
+    }
+
+    .todo p {
+      margin: 0;
+    }
+
+    .todo-meta {
+      font-size: 0.7em;
+    }
+  </style>
+</head>
+<body>
+  <div class="todos">
+    {{range .Items}}
+    <div class="todo">
+      <p class="todo-text">{{.Content}}</p>
+      {{ if .Due.Amount }}
+      <p class="todo-meta">
+        {{.Due.Amount}}
+      </p>
+      {{ end }}
+    </div>
+    {{end}}
+  </div>
+</body>
+</html>
