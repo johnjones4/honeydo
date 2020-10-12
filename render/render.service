@@ -1,0 +1,16 @@
+[Unit]
+Description=Render
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+Environment=TEMPLATE=/home/pi/honeydo/render/template.html
+Environment=TODOIST_TOKEN=
+Environment=TODOIST_PROJECT_ID=
+WorkingDirectory=/home/pi/honeydo/render
+ExecStart=/home/pi/honeydo/render/run.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
