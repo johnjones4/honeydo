@@ -17,7 +17,7 @@ install-deps:
 	rm -rf bcm2835-1.68
 	wget https://golang.org/dl/go1.15.2.linux-armv6l.tar.gz
 	tar zxvf go1.15.2.linux-armv6l.tar.gz
-	sudo cp go /usr/local/go
+	sudo mv go /usr/local/go
 	wget https://www.waveshare.com/w/upload/1/15/IT8951.tar.gz
 	tar zxvf IT8951.tar.gz
 	rm IT8951.tar.gz
