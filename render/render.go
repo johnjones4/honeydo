@@ -163,6 +163,9 @@ func getWeatherInfo() (weatherInfo, error) {
 	if err != nil {
 		return weatherInfo{}, err
 	}
+	if len(apiInfo.Features) == 0 {
+		return weatherInfo{}, nil
+	}
 	tempF := (apiInfo.Features[0].Properties.Temperature.Value * (9.0 / 5.0)) + 32.0
 	return weatherInfo{
 		Temperature: fmt.Sprintf("%0.0f", tempF),
