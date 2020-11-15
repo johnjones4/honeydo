@@ -2,12 +2,34 @@
 <html lang="en">
 <head>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
-      font-size: 2em;
+      font-size: 30px;
       line-height: 1em;
+      background: black;
+    }
+
+    .container {
+      width: 825px;
+      height: 1200px;
+      position: relative;
+      margin: auto;
+      background: white;
+    }
+
+    .todos {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 930px;
+      overflow: hidden;
     }
 
     .todo {
@@ -26,20 +48,85 @@
     .todo-meta {
       font-size: 0.7em;
     }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 270px;
+    }
+
+    .tile {
+      width: 270px;
+      height: 270px;
+      float: left;
+      border: solid 1px #999;
+      background: #eee;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-top: 53px;
+      margin-right: 7px;
+    }
+
+    .tile:last-child {
+      margin-right: 0;
+    }
+
+    .weather .temperature {
+      font-size: 135px;
+      line-height: 1em;
+    }
+
+    .weather .current {
+      font-size: 0.75em;
+      line-height: 1em;
+    }
+
+    .calendar {
+      padding-top: 90px;
+    }
+
+    .calendar .time {
+      font-size: 64px;
+      line-height: 1em;
+    }
+
+    .baby .days {
+      font-size: 135px;
+      line-height: 1em;
+    }
   </style>
 </head>
 <body>
-  <div class="todos">
-    {{range .Items}}
-    <div class="todo">
-      <p class="todo-text">{{.Content}}</p>
-      {{ if .Due.Amount }}
-      <p class="todo-meta">
-        {{.Due.Amount}}
-      </p>
-      {{ end }}
+  <div class="container">
+    <div class="todos">
+      {{range .Todo}}
+      <div class="todo">
+        <p class="todo-text">{{.Content}}</p>
+        {{ if .Due.Amount }}
+        <p class="todo-meta">
+          {{.Due.Amount}}
+        </p>
+        {{ end }}
+      </div>
+      {{end}}
     </div>
-    {{end}}
+    <div class="footer">
+      <div class="tile weather">
+        <div class="temperature">{{.Weather.Temperature}}</div>
+        <div class="current">{{.Weather.Conditions}}</div>
+      </div>
+      <div class="tile calendar">
+        <div class="time">{{.Calendar.Time}}</div>
+        <div class="date">{{.Calendar.Date}}</div>
+      </div>
+      <div class="tile baby">
+        <div class="days">{{.Baby.Days}}</div>
+        <div class="caption">Days to Baby</div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
