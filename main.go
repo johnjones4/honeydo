@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"main/render"
 	"main/service"
+	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -14,17 +16,39 @@ func main() {
 		log.Fatal(err)
 	}
 
-	lists := []string{
-		"618858f063d5d166da25fb55",
-		"614df2cdaa19637d9bc2062e",
-		"615311beb3367261ab43acbe",
+	err = render.LoadFonts()
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	for _, l := range lists {
-		cards, err := service.FetchCards(l)
+	lists := []render.List{
+		{
+			ID:    os.Getenv("TRELLO_MEALS_LIST"),
+			Title: "Meal Plan",
+		},
+		{
+			ID:    os.Getenv("TRELLO_TODO_LIST"),
+			Title: "To Do",
+		},
+		{
+			ID:    os.Getenv("TRELLO_SHOPPING_LIST"),
+			Title: "Shopping",
+		},
+	}
+
+	for i, l := range lists {
+		cards, err := service.FetchCards(l.ID)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(cards)
+		lists[i].Cards = cards
 	}
+
+	events, err := service.GetCalendars(strings.Split(os.Getenv("ICS_URLS"), "|"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx := render.Render(events, lists)
+	ctx.SavePNG("./render.png")
 }
