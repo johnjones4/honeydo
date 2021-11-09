@@ -1,7 +1,6 @@
 package main
 
 import (
-	"image/png"
 	"log"
 	"main/render"
 	"main/service"
@@ -9,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/joho/godotenv"
+	"golang.org/x/image/bmp"
 )
 
 func main() {
@@ -58,7 +58,7 @@ func main() {
 	}
 
 	defer file.Close()
-	err = png.Encode(file, ctx.Image())
+	err = bmp.Encode(file, ctx.Image())
 	if err != nil {
 		log.Fatal(err)
 	}
