@@ -1,0 +1,13 @@
+[Unit]
+Description=Render
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/honeydo
+ExecStart=/home/pi/honeydo/run.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

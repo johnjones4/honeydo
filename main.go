@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image/png"
 	"log"
 	"main/render"
 	"main/service"
@@ -50,5 +51,15 @@ func main() {
 	}
 
 	ctx := render.Render(events, lists)
-	ctx.SavePNG("./render.png")
+
+	file, err := os.Create("./rendered.bmp")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer file.Close()
+	err = png.Encode(file, ctx.Image())
+	if err != nil {
+		log.Fatal(err)
+	}
 }
