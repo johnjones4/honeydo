@@ -77,7 +77,7 @@ func columnForDate(d time.Time) int {
 
 func drawRow(ctx *gg.Context, origin image.Point, dayWidth, dayHeight float64, startIndex int, startDate time.Time, events []gocal.Event) time.Time {
 	date := startDate
-	for i, _ := range daysOfTheWeek {
+	for i := range daysOfTheWeek {
 		x := float64(origin.X) + dayWidth*float64(i)
 		if i < startIndex {
 			ctx.SetRGB(0.95, 0.95, 0.95)
